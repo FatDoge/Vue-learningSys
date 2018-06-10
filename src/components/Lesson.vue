@@ -43,13 +43,16 @@
             <p></p>
         </div>
     </div>
-    <vue-comment></vue-comment>
+    <!-- <comment-grid 
+  baseURL="https://comment-f5318.firebaseapp.com"
+  apiKey="AIzaSyDZRsoU6e9eiCqEFtZng3lBlwjNIg3CNKE"
+  nodeName="comment">
+</comment-grid> -->
   </div>
 </template>
 <script>
 import Vue from 'vue'
 import VueDPlayer from 'vue-dplayer'
-import VueComment from './Comment'
 export default {
   name: 'Lesson',
   data () {
@@ -79,7 +82,6 @@ export default {
       }},
   components: {
     'd-player': VueDPlayer,
-    'vue-comment':VueComment
   }
 }
 </script>

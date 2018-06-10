@@ -27,9 +27,10 @@
     font-weight: lighter;
     height: 100px;
     bottom: 0;
+    width: 100%;
 }
 .footer a{
-  color: white;
+  color: white!important;
 }
 </style>
 <script>

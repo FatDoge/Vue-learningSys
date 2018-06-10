@@ -10,6 +10,9 @@ import { Notification } from 'element-ui';
 import api from '../static/api/api'
 Vue.prototype.$api = api
 Vue.prototype.$notify = Notification;
+import CommentGrid from 'vue-comment-grid'
+
+Vue.use(CommentGrid)
 Vue.use(VueLazyload);
 Vue.use(VueResource);
 Vue.component('right-navbar', RightNavbar)
