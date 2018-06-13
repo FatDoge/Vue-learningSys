@@ -17,12 +17,13 @@ npm run build --report
 ```
 - local api server
 ```
-cd server
-node server.js
+git clone https://github.com/FatDoge/yzedu-APIServer
+npm install&&npm start
+APIServerURL=>localhost:3000
 ```
 - test accounts
-> teacher: admin
-> student: test
+> teacher: admin xuke19971217
+> student: test xuke19971217
 
 - dependencies
 
