@@ -94,7 +94,7 @@ export default {
           path:'/circle/',
           text:'学友圈'
       },{
-          path:'/',
+          path:'/test',
           text:'实训'
       }],
       username:'',
@@ -106,7 +106,8 @@ export default {
     }
   },methods:{
         userLogin(username,password){
-            this.$api.login(username,password);
+            //本地api
+            //this.$api.login(username,password);
             if(this.username&&this.password){
             this.$options.methods.Notice.bind(this)({
                 title:'校验成功',
@@ -225,5 +226,8 @@ export default {
 .list ul li a:hover{
     color: #48cfad;
     transition: .3s ease-in-out;
+}
+li .router-link-exact-active{
+   color:#48cfad;
 }
 </style>

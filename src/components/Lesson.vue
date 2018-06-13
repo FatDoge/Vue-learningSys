@@ -42,12 +42,8 @@
             <h4>参考资料</h4>
             <p></p>
         </div>
+        <div id="comment"></div>
     </div>
-    <!-- <comment-grid 
-  baseURL="https://comment-f5318.firebaseapp.com"
-  apiKey="AIzaSyDZRsoU6e9eiCqEFtZng3lBlwjNIg3CNKE"
-  nodeName="comment">
-</comment-grid> -->
   </div>
 </template>
 <script>
@@ -74,7 +70,17 @@ export default {
     }
   },
    mounted() {
-      this.player = this.$refs.player.dp
+      this.player = this.$refs.player.dp;
+      new Valine({
+    el: '#comment' ,
+    notify:false, 
+    verify:false, 
+    appId: 'pEUNSmIOUPk1jIRvWfEqdRLc-gzGzoHsz',
+    appKey: 'NupnAdXxRyow0Y5PeHdhqNNK',
+    placeholder: 'just go go',
+    path:this.$route.path, 
+    avatar:'mm' 
+});
     },
     methods: {
       play() {
@@ -82,12 +88,18 @@ export default {
       }},
   components: {
     'd-player': VueDPlayer,
+  },
+  watch:{
+      //检测url变动刷新comment
   }
 }
 </script>
 <style>
 .dplayer {
     box-shadow: -10px 11px 0px 0px rgba(72, 207, 173, 0.61), 0 2px 2px 0 rgba(72, 207, 173, 0.49);
+}
+#comment{
+    text-align: left;
 }
 </style>
 
