@@ -67,20 +67,22 @@ export default {
           ]
         },
         player: null,
+        //valine配置
+        valineop:{
+            el: '#comment' ,
+            notify:false, 
+            verify:false, 
+            appId: 'pEUNSmIOUPk1jIRvWfEqdRLc-gzGzoHsz',
+            appKey: 'NupnAdXxRyow0Y5PeHdhqNNK',
+            placeholder: '来点评论呀~',
+            path:this.$route.path, 
+            avatar:'mm' 
+        }
     }
   },
    mounted() {
       this.player = this.$refs.player.dp;
-      new Valine({
-    el: '#comment' ,
-    notify:false, 
-    verify:false, 
-    appId: 'pEUNSmIOUPk1jIRvWfEqdRLc-gzGzoHsz',
-    appKey: 'NupnAdXxRyow0Y5PeHdhqNNK',
-    placeholder: 'just go go',
-    path:this.$route.path, 
-    avatar:'mm' 
-});
+      new Valine(this.valineop);
     },
     methods: {
       play() {
@@ -90,7 +92,16 @@ export default {
     'd-player': VueDPlayer,
   },
   watch:{
-      //检测url变动刷新comment
+      //检测url变动重新渲染comment
+      $route(to){
+          console.log(to);
+          let that=this;
+          Vue.nextTick(function(){
+              setTimeout(() => {
+                 new Valine(that.valineop).init(that.valineop);
+              }, 50);
+        })
+      }
   }
 }
 </script>
@@ -100,6 +111,33 @@ export default {
 }
 #comment{
     text-align: left;
+}
+.v .vbtn:active, .v .vbtn:hover {
+    color: #48cfad;
+    border-color: #48cfad;
+    background-color: #fff;
+}
+.v .txt-right {
+    display: none;
+}
+.v .vlist .vcard section .vfooter .vat {
+    color: #48cfad;
+}
+.v .vlist .vcard .vhead .vsys {
+    background: #48cfad;
+    color: white;
+}
+.v .vwrap .vheader .vinput:focus {
+    border-bottom: 1px dashed #48cfad;
+}
+.v .vbtn {
+    color: white;
+    border: 1px solid #48cfad;
+    background: #48cfad;
+}
+.v .vwrap {
+    border-radius: 0px;
+    box-shadow: -10px 11px 0px 0px rgba(72, 207, 173, 0.61), 0 2px 2px 0 rgba(72, 207, 173, 0.49);
 }
 </style>
 
