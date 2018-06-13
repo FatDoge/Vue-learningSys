@@ -22,13 +22,13 @@
         <div class="work">
         <div class="left-span">
             <ul>
-                <li v-for="(item,index) in stuBar" v-if="power==='0'" :key="index">
+                <li v-for="(item,index) in stuBar" v-if="power===0" :key="index">
                     <router-link :to="item.href">
                         <i :class="item.class"></i>
                         <span>{{item.text}}</span>
                     </router-link>
                 </li>
-                <li v-for="(item,index) in teaBar" v-if="power==='1'" :key="index">
+                <li v-for="(item,index) in teaBar" v-if="power===1" :key="index">
                     <router-link :to="item.href">
                         <i :class="item.class"></i>
                         <span>{{item.text}}</span>
@@ -125,7 +125,7 @@ export default {
   watch:{
     $route(to,from){
       console.log(to,from);
-      if(to.params.id!==JSON.parse(sessionStorage.getItem('yzInfo')).userid){
+      if(to.params.id!==JSON.parse(sessionStorage.getItem('yzInfo')).userid.toString()){
           this.$notify({
           title: '非法操作',
           message: '权限错误...',

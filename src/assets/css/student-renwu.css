@@ -128,7 +128,6 @@ div {
 .renwu{
     margin-left: 360px;
     min-height: 589px;
-    width: 900px;
     text-align: left;
 }
 .right-renwu{
@@ -185,7 +184,6 @@ div {
 }
 .catog-points span{
     display: block;
-    width: 1100px;
     line-height: 25px;
 }
 .catog-points .i-top a{

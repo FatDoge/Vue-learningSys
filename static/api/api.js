@@ -1,5 +1,9 @@
 import axios from 'axios'
 import config from './config'
+import Vue from 'Vue'
+import { Notification} from 'element-ui'
+Vue.prototype.$notify = Notification;
+import Bus from '../../src/components/Bus'
 /**
  * @fatdoge
  * 登录
@@ -13,6 +17,25 @@ let login= function (username, password) {
     })
         .then(function (res) {
             console.log(res.data);
+            if(res.data.status!==200){
+                console.log('登陆失败')
+                Vue.prototype.$notify({
+                    title: '登录失败',
+                    message: '请检查账户',
+                    type: 'error'
+                })
+                return false;
+            }else if(res.data.status===200){
+                Vue.prototype.$notify({
+                    title: '登录成功',
+                    message: '现在享有更多权限',
+                    type: 'success'
+                })
+                console.log('登陆成功')
+                sessionStorage.setItem('yzInfo', JSON.stringify(res.data.data[0]));
+                Bus.$emit('yzInfo',JSON.stringify(res.data.data[0]))
+                return true;
+            }
         })
         .catch(function (error) {
             console.log(error);

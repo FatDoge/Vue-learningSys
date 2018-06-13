@@ -80,6 +80,7 @@
 
 <script>
 import Vue from 'Vue'
+import Bus from './Bus'
 export default {
   name: 'Navbar',
   data () {
@@ -107,13 +108,11 @@ export default {
   },methods:{
         userLogin(username,password){
             //本地api
-            //this.$api.login(username,password);
             if(this.username&&this.password){
-            this.$options.methods.Notice.bind(this)({
-                title:'校验成功',
-                message:"登录中...",
-                type:'success',
-            });}else{
+                this.$api.login(username,password);
+                $('#myModal').modal('hide');
+                //个人信息存入sessionStorage中，当前会话有效
+            }else{
             this.$options.methods.Notice.bind(this)({
                 title:'校验失败',
                 message:"请填写完整",
@@ -121,23 +120,7 @@ export default {
             });
             return false;
             }
-            console.log(username,password); 
-            this.$http.get('/static/mock/infoData.json')
-            .then((response) => {
-                let info=response.data.filter((item,index,array)=>{
-                    return username===item.username;
-                });
-                 $('#myModal').modal('hide');
-                //个人信息存入sessionStorage中，当前会话有效
-                sessionStorage.setItem('yzInfo', JSON.stringify(info[0]));
-                let info1=JSON.parse(sessionStorage.getItem('yzInfo'));
-            this.picUrl=info1.headlogo;
-            this.nickname=info1.nickname;
-                this.isLogin=true;
-                this.userid=info1.userid;
-            }).catch((response) => {
-                console.log(response);
-            });       
+            console.log(username,password);       
         },
         userExit(){
             this.$options.methods.Notice.bind(this)({
@@ -170,6 +153,19 @@ export default {
             this.userid=info1.userid;
             }
         })
+        let self = this
+        Bus.$on('yzInfo', (e) => {
+            self.$nextTick(function () {
+            if(sessionStorage.getItem('yzInfo')){
+            let info1=JSON.parse(sessionStorage.getItem('yzInfo'));
+            self.picUrl=info1.headlogo;
+            self.nickname=info1.nickname;
+            self.isLogin=true;
+            self.userid=info1.userid;
+            }
+        })
+　　　　　console.log(`传来的数据是：${e}`)
+       })
   }
 }
 </script>
