@@ -22,14 +22,18 @@ let login= function (username, password) {
                 Vue.prototype.$notify({
                     title: '登录失败',
                     message: '请检查账户',
-                    type: 'error'
+                    type: 'error',
+                    offset:50,
+                    duration: 1000
                 })
                 return false;
             }else if(res.data.status===200){
                 Vue.prototype.$notify({
                     title: '登录成功',
-                    message: '现在享有更多权限',
-                    type: 'success'
+                    message: `你好,${res.data.data[0].nickname}!`,
+                    type: 'success',
+                    offset:50,
+                    duration: 1000
                 })
                 console.log('登陆成功')
                 sessionStorage.setItem('yzInfo', JSON.stringify(res.data.data[0]));
