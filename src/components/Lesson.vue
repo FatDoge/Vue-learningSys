@@ -83,6 +83,7 @@ export default {
    mounted() {
       this.player = this.$refs.player.dp;
       new Valine(this.valineop);
+      console.log(this.valineop)
     },
     methods: {
       play() {
@@ -94,12 +95,10 @@ export default {
   watch:{
       //检测url变动重新渲染comment
       $route(to){
-          console.log(to);
           let that=this;
+          that.valineop.path=that.$route.path;
           Vue.nextTick(function(){
-              setTimeout(() => {
-                 new Valine(that.valineop).init(that.valineop);
-              }, 50);
+            new Valine(that.valineop);
         })
       }
   }
