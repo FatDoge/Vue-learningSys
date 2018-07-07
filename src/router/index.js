@@ -27,6 +27,8 @@ import Mission from '@/components/SelfCenter/Mission'
 import Grade from '@/components/SelfCenter/Grade'
 import Skill from '@/components/SelfCenter/Skill'
 import News from '@/components/SelfCenter/News'
+//教师管理课程
+import Upload from '@/components/SelfCenter/Upload'
 //个人设置
 import SettingNavbar from '@/components/SelfCenter/Setting/SettingNavbar'
 import SetUp from '@/components/SelfCenter/Setting/SetUp'
@@ -144,6 +146,10 @@ export default new Router({
           // Setting 会被渲染在 Myhead 的 <router-view> 中
           path: 'news',
           component: News
+        },
+        {
+          path: 'upload',
+          component: Upload
         }
       ]
     },{

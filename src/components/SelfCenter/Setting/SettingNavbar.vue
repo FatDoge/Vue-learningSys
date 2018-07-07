@@ -162,6 +162,7 @@
 }
 </style>
 <script>
+import myhead from '../Myhead'
 export default {
     name:'settingNavbar',
     data(){
@@ -179,7 +180,8 @@ export default {
                 text:'学籍认证'
             }]
         }
-    }
+    },
+    components:{myhead}
 }
 </script>
 

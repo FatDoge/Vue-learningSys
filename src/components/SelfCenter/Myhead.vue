@@ -96,6 +96,10 @@ export default {
                 href:'./skill',
                 class:"fa fa-thumbs-up",
                 text:"能力档案"
+            },{
+                href:'./upload',
+                class:"fa fa-upload",
+                text:"上传视频"
             }]
         }
     },
