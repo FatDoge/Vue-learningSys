@@ -39,7 +39,7 @@
                                     </a>
                                 </span>
                                 <div class="btn-behave">
-                                <a href="#" target="_blank" class="btn-red continute-btn">继续学习</a>
+                                <a href="#" target="_blank" class="btn-red continute-btn">删除</a>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +79,7 @@
                                     </a>
                                 </span>
                                 <div class="btn-behave">
-                                <a href="#" target="_blank" class="btn-red continute-btn">继续学习</a>
+                                <a href="#" target="_blank" class="btn-red continute-btn">删除</a>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +119,7 @@
                                     </a>
                                 </span>
                                 <div class="btn-behave">
-                                <a href="#" target="_blank" class="btn-red continute-btn">继续学习</a>
+                                <a href="#" target="_blank" class="btn-red continute-btn">删除</a>
                                 </div>
                             </div>
                         </div>
@@ -159,7 +159,7 @@
                                     </a>
                                 </span>
                                 <div class="btn-behave">
-                                <a href="#" target="_blank" class="btn-red continute-btn">继续学习</a>
+                                <a href="#" target="_blank" class="btn-red continute-btn">删除</a>
                                 </div>
                             </div>
                         </div>

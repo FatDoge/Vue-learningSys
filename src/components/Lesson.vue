@@ -67,7 +67,11 @@ export default {
                   text: 'GitHub',
                   link: 'https://github.com/fatdoge'
               }
-          ]
+          ],
+          danmaku: {
+            id: 'yzLesson1',
+            api: 'https://api.prprpr.me/dplayer/'
+        }
         },
         player: null,
         //valine配置
