@@ -19,6 +19,9 @@
         </div>
         <center>
             <h2>Office高级应用</h2>
+            <vue-star animate="animated rubberBand" color="rgb(152, 138, 222)">
+                <a slot="icon" class="fa fa-heart collect" @click="handleClick"></a>
+            </vue-star>
             <div class="classVideo">
                 <h3>课程{{this.$route.params.lessonid}}渲染</h3>
                <div class="container">
@@ -88,7 +91,12 @@ export default {
     methods: {
       play() {
         console.log('play callback')
-      }},
+      },
+      handleClick () {
+      //do something
+      console.log('点击')
+    }
+    },
   components: {
     'd-player': VueDPlayer,
   },
@@ -125,6 +133,8 @@ export default {
 .v .vlist .vcard .vhead .vsys {
     background: #48cfad;
     color: white;
+    box-shadow: 0 4px 8px 0 rgba(72, 207, 173, 0.41);
+    border-radius: 12px;
 }
 .v .vwrap .vheader .vinput:focus {
     border-bottom: 1px dashed #48cfad;
@@ -133,10 +143,47 @@ export default {
     color: white;
     border: 1px solid #48cfad;
     background: #48cfad;
+    box-shadow: 0 4px 8px 0 rgba(72, 207, 173, 0.41);
+    border-radius: 12px;
+}
+.v .vbtn:hover{
+    color: white;
+    border: 1px solid #48cfad;
+    background: #48cfad;
+    box-shadow: 0 4px 8px 0 rgba(72, 207, 173, 0.41);
+    border-radius: 12px;
 }
 .v .vwrap {
-    border-radius: 0px;
-    box-shadow: -10px 11px 0px 0px rgba(72, 207, 173, 0.61), 0 2px 2px 0 rgba(72, 207, 173, 0.49);
+    background: #FFF;
+    box-shadow: 0 4px 8px 0 rgba(7,17,27,.1);
+    border-radius: 12px;}
+.vcard{
+        position: relative;
+    margin-bottom: 8px;
+    padding: 32px;
+    background: #FFF;
+    box-shadow: 0 4px 8px 0 rgba(7,17,27,.1);
+    border-radius: 12px;
+}
+.vnick:hover{
+    color:#48cfad!important;
+}
+.vat{
+    color: #48cfad!important;
+}
+.collect{
+    color: #a9a9a9;
+    right: 0;
+    font-size: 20px;
+    transition: .3s ease-in-out;
+}
+.collect:hover{
+    color: rgb(240, 86, 84);
+    font-size: 24px;
+    transition: .3s ease-in-out;
+}
+.animated .collect{
+    color: rgb(240, 86, 84);
 }
 </style>
 

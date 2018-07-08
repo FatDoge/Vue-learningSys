@@ -5,7 +5,7 @@
                     <div class="setting-left l">
                         <div class="user-cont">
                             <div class="user-mode">
-                                <a href="#" class="user-setupimg"><img :src="headlogo"></a>
+                                <a class="user-setupimg"><img :src="headlogo"></a>
                             </div>
                         </div>
                         <div class="des-mode">

@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import VCharts from 'v-charts'
 import router from './router'
 import RightNavbar from '@/components/CircleNavbar/RightNavbar'
 import VueResource from 'vue-resource';
@@ -11,7 +12,8 @@ import api from '../static/api/api'
 Vue.prototype.$api = api
 Vue.prototype.$notify = Notification;
 import CommentGrid from 'vue-comment-grid'
-
+import VueStar from 'vue-star'
+Vue.component('VueStar', VueStar)
 Vue.use(CommentGrid)
 Vue.use(VueLazyload);
 Vue.use(VueResource);
@@ -30,6 +32,7 @@ Vue.use(TimePicker)
 Vue.use(Select)
 Vue.use(Option)
 Vue.use(Col)
+Vue.use(VCharts)
 Vue.component('right-navbar', RightNavbar)
 Vue.config.productionTip = false
 /* eslint-disable no-new */

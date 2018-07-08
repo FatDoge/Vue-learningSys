@@ -12,8 +12,10 @@
   "dependencies": {
     "axios": "^0.18.0",
     "dplayer": "^1.22.2",
+    "echarts": "^4.1.0",
     "element-ui": "^2.3.9",
     "npm": "^6.0.1",
+    "v-charts": "^1.17.6",
     "vue": "^2.5.2",
     "vue-comment-grid": "^1.0.11",
     "vue-dplayer": "0.0.9",
@@ -52,6 +54,7 @@
     "url-loader": "^0.5.9",
     "vue-lazyload": "^1.2.3",
     "vue-loader": "^13.3.0",
+    "vue-star": "0.0.4",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.6.0",

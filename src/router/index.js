@@ -22,11 +22,11 @@ import Page404 from '@/components/404/Page404'
 import Myhead from '@/components/SelfCenter/Myhead'
 //个人中心二级组件
 import SelfLesson from '@/components/SelfCenter/SelfLesson'
-import Work from '@/components/SelfCenter/Work'
 import Mission from '@/components/SelfCenter/Mission'
 import Grade from '@/components/SelfCenter/Grade'
 import Skill from '@/components/SelfCenter/Skill'
 import News from '@/components/SelfCenter/News'
+import History from '@/components/SelfCenter/History'
 //教师管理课程
 import Upload from '@/components/SelfCenter/Upload'
 //个人设置
@@ -118,12 +118,6 @@ export default new Router({
           component:SelfLesson
         },
         {
-          // 当 /user/:id/profile 匹配成功，
-          // UserProfile 会被渲染在 User 的 <router-view> 中
-          path: 'work',
-          component: Work
-        },
-        {
           // 当 /user/:id/posts 匹配成功
           // UserPosts 会被渲染在 User 的 <router-view> 中
           path: 'mission',
@@ -150,6 +144,10 @@ export default new Router({
         {
           path: 'upload',
           component: Upload
+        },
+        {
+          path: 'history',
+          component: History
         }
       ]
     },{

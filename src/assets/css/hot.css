@@ -7,9 +7,7 @@ a {
 li{
 	list-style: none;
 }
-a:link, a:visited, body, html {
-    color: #1c1f21;
-}
+
 p {
     display: block;
     -webkit-margin-before: 1em;

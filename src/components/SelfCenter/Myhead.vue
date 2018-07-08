@@ -56,17 +56,9 @@ export default {
                 class:"fa fa-user",
                 text:"我的课程"
             },{
-                href:'./work',
-                class:"fa fa-flask",
-                text:"综合实训"
-            },{
-                href:'./mission',
-                class:"fa fa-clipboard",
-                text:"我的任务"
-            },{
-                href:'./grade',
-                class:"fa fa-search",
-                text:"成绩查询"
+                href:'./history',
+                class:"fa fa-history",
+                text:"浏览记录"
             },{
                 href:'./skill',
                 class:"fa fa-thumbs-up",
@@ -80,14 +72,6 @@ export default {
                 href:'./',
                 class:"fa fa-user",
                 text:"课程管理"
-            },{
-                href:'./work',
-                class:"fa fa-flask",
-                text:"综合实训"
-            },{
-                href:'./mission',
-                class:"fa fa-clipboard",
-                text:"任务管理"
             },{
                 href:'./grade',
                 class:"fa fa-search",
