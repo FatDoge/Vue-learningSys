@@ -2,7 +2,7 @@
     <div id="binding">
         <div class="setting-right">
                     <div class="toptitle l">
-                        账号绑定
+                        账号管理
                     </div>
                     <div class="right-ques r">
                         <img src="static/img\quesblue.png">
@@ -49,7 +49,7 @@
                                     </div>
                                     <div class="info-center">
                                         <p><span class="font1">密码</span> 
-                                            <span class="font4">未绑定（设置密码需要先绑定手机或邮箱）</span>
+                                            <span class="font4">(修改密码需要先绑定手机或邮箱)</span>
                                         </p>
                                         <p class="font2">用于保护账号信息和登录安全</p>
                                     </div>

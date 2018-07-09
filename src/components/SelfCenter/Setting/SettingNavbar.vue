@@ -174,7 +174,7 @@ export default {
                 text:'个人信息'
             },{
                 href:'./binding',
-                text:'账号绑定'
+                text:'账号管理'
             },{
                 href:'./identity',
                 text:'学籍认证'

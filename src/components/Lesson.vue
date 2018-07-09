@@ -27,7 +27,7 @@
                <div class="container">
                    <d-player :options="options"
                         @play="play"
-                        ref="player">
+                        ref="player" @pause="pause" @progress="progress" @ended="ended">
                 </d-player>
                 </div>
             </div>
@@ -71,7 +71,8 @@ export default {
           danmaku: {
             id: 'yzLesson1',
             api: 'https://api.prprpr.me/dplayer/'
-        }
+        },
+        screenshot:true
         },
         player: null,
         //valine配置
@@ -95,6 +96,17 @@ export default {
     methods: {
       play() {
         console.log('play callback')
+        console.log(this.player.danmaku.id)
+      },
+      pause(){
+          console.log('pause callback')
+      },
+      progress(){
+          let currentTime=this.player.video.currentTime;
+          console.log('当前进度:'+currentTime,"视频id:"+this.options.danmaku.id);
+      },
+      ended(){
+          console.log('视频播放完毕')
       },
       handleClick () {
       //do something
@@ -188,6 +200,12 @@ export default {
 }
 .animated .collect{
     color: rgb(240, 86, 84);
+}
+.VueStar{
+    position: fixed;
+    right: -13px;
+    bottom: 40px;
+    z-index: 999;
 }
 </style>
 

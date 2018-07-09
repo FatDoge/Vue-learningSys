@@ -4,6 +4,7 @@ import Vue from 'Vue'
 import { Notification} from 'element-ui'
 Vue.prototype.$notify = Notification;
 import Bus from '../../src/components/Bus'
+import { resolve } from 'url';
 /**
  * @fatdoge
  * 登录
@@ -52,9 +53,25 @@ let login= function (username, password) {
 let register= function (info) {
 
 }
-
+/**
+ * @fatdoge
+ * 新闻版块
+ */
+let getNews = function () {
+    return new Promise((resolve,reject)=>{
+        axios.get(config.getNews)
+            .then((response) => {
+                resolve(response)
+            }
+            )
+            .catch((error)=>{
+                reject(error)
+            })
+    })
+}
 console.log('api.js loaded...')
 export default {
     login,
-    register
+    register,
+    getNews
 }

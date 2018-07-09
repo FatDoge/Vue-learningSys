@@ -7,7 +7,7 @@ import router from './router'
 import RightNavbar from '@/components/CircleNavbar/RightNavbar'
 import VueResource from 'vue-resource';
 import VueLazyload from 'vue-lazyload';
-import { Notification, Pagination,Upload,Form,FormItem,Input,Radio,RadioGroup,Button,Checkbox,CheckboxGroup,DatePicker,TimePicker,Select,Option,Col } from 'element-ui';
+import { Notification, Pagination,Upload,Form,FormItem,Input,Radio,RadioGroup,Button,Checkbox,CheckboxGroup,DatePicker,TimePicker,Select,Option,Col,Row } from 'element-ui';
 import api from '../static/api/api'
 Vue.prototype.$api = api
 Vue.prototype.$notify = Notification;
@@ -32,7 +32,12 @@ Vue.use(TimePicker)
 Vue.use(Select)
 Vue.use(Option)
 Vue.use(Col)
+Vue.use(Row)
 Vue.use(VCharts)
+// collapse 展开折叠
+import CollapseTransition from 'element-ui/lib/transitions/collapse-transition';
+
+Vue.component(CollapseTransition.name, CollapseTransition)
 Vue.component('right-navbar', RightNavbar)
 Vue.config.productionTip = false
 /* eslint-disable no-new */
