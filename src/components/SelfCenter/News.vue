@@ -31,7 +31,7 @@ export default {
         this.newsList=this.$api.getNews()
         .then(
             (response)=>{
-                this.newsList=response.data.results;
+                this.newsList=response.data.data;
             }
         )
     },

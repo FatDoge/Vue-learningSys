@@ -45,7 +45,7 @@ export default {
     data(){
         return {
             nickname:'',
-            picUrl:'',
+            picUrl:"http://p9wmpwieh.bkt.clouddn.com/yzedu/img/headlogo/guest1.jpg",
             identity:'',
             school:'',
             userid:'',
@@ -91,7 +91,7 @@ export default {
         this.$nextTick(function () {
             if(sessionStorage.getItem('yzInfo')){
             let info1=JSON.parse(sessionStorage.getItem('yzInfo'));
-            this.picUrl=info1.headlogo;
+            this.picUrl=info1.headlogo||"http://p9wmpwieh.bkt.clouddn.com/yzedu/img/headlogo/guest1.jpg";
             this.nickname=info1.nickname;
             this.identity=info1.identity;
             this.school=info1.school;

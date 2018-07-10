@@ -1,8 +1,16 @@
 /**
  * 接口地址
  */
-let url = 'http://localhost:3000'
+let url = 'http://hduzjh.cn/LearningSys'
 export default {
-    loginUrl:`${url}/login`,
-    getNews:'http://gank.io/api/search/query/listview/category/all/count/10/page/1',
+    // 登录接口
+    loginUrl:`${url}/user/confirm`,
+    // 注册接口
+    registerUrl: `${url}/user/register`,
+    // 新闻接口
+    getNews:`${url}/news/query`,
+    // 单节课程接口
+    singleLessonInfo:'',
+    //课程列表接口
+    lessonListUrl:''
 }

@@ -10,11 +10,9 @@ import { resolve } from 'url';
  * 登录
  */
 let login= function (username, password) {
-    axios.get(config.loginUrl, {
-        params: {
-            username: username,
-            password: password
-        }
+    axios.post(config.loginUrl, {
+        username: username,
+        password: password
     })
         .then(function (res) {
             console.log(res.data);
@@ -31,14 +29,14 @@ let login= function (username, password) {
             }else if(res.data.status===200){
                 Vue.prototype.$notify({
                     title: '登录成功',
-                    message: `你好,${res.data.data[0].nickname}!`,
+                    message: `你好,${res.data.data.nickname}!`,
                     type: 'success',
                     offset:50,
                     duration: 1000
                 })
                 console.log('登陆成功')
-                sessionStorage.setItem('yzInfo', JSON.stringify(res.data.data[0]));
-                Bus.$emit('yzInfo',JSON.stringify(res.data.data[0]))
+                sessionStorage.setItem('yzInfo', JSON.stringify(res.data.data));
+                Bus.$emit('yzInfo',JSON.stringify(res.data.data))
                 return true;
             }
         })
@@ -50,8 +48,17 @@ let login= function (username, password) {
  * @fatdoge
  * 注册
  */
-let register= function (info) {
-
+let register= function (registerParams) {
+    return new Promise((resolve, reject) => {
+        axios.post(config.registerUrl,registerParams)
+            .then((response) => {
+                resolve(response)
+            }
+            )
+            .catch((error) => {
+                reject(error)
+            })
+    })
 }
 /**
  * @fatdoge
@@ -69,9 +76,47 @@ let getNews = function () {
             })
     })
 }
+/**
+ * @fatdoge
+ * 单节课程信息
+ */
+let getSingleLessonInfo = function(lessonId){
+    return new Promise((resolve,reject)=>{
+        axios.get(config.singleLessonInfo,{
+            params:{
+                id: lessonId
+            }
+        })
+            .then((response) => {
+                resolve(response)
+            }
+            )
+            .catch((error) => {
+                reject(error)
+            })    
+    })
+}
+/**
+ * @fatdoge
+ * 获取课程列表
+ */
+let getLessonsList = function(){
+    return new Promise((resolve, reject) => {
+        axios.get(config.lessonListUrl)
+            .then((response) => {
+                resolve(response)
+            }
+            )
+            .catch((error) => {
+                reject(error)
+            })
+    })    
+}
 console.log('api.js loaded...')
 export default {
-    login,
-    register,
-    getNews
+    login,//已连接
+    register,//已连接
+    getNews,//已连接
+    getSingleLessonInfo,
+    getLessonsList
 }

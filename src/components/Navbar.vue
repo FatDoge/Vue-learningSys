@@ -144,7 +144,7 @@ export default {
         this.$nextTick(function () {
             if(sessionStorage.getItem('yzInfo')){
             let info1=JSON.parse(sessionStorage.getItem('yzInfo'));
-            this.picUrl=info1.headlogo;
+            this.picUrl=info1.headlogo||"http://p9wmpwieh.bkt.clouddn.com/yzedu/img/headlogo/guest1.jpg";
             this.nickname=info1.nickname;
             this.isLogin=true;
             this.userid=info1.userid;
@@ -155,7 +155,7 @@ export default {
             self.$nextTick(function () {
             if(sessionStorage.getItem('yzInfo')){
             let info1=JSON.parse(sessionStorage.getItem('yzInfo'));
-            self.picUrl=info1.headlogo;
+            self.picUrl=info1.headlogo||"http://p9wmpwieh.bkt.clouddn.com/yzedu/img/headlogo/guest1.jpg";
             self.nickname=info1.nickname;
             self.isLogin=true;
             self.userid=info1.userid;
