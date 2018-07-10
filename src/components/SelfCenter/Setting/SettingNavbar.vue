@@ -168,7 +168,7 @@ export default {
     data(){
         return {
             nickname:JSON.parse(sessionStorage.getItem('yzInfo')).nickname,
-            headlogo:JSON.parse(sessionStorage.getItem('yzInfo')).headlogo||"http://p9wmpwieh.bkt.clouddn.com/yzedu/img/headlogo/guest1.jpg",
+            headlogo:JSON.parse(sessionStorage.getItem('yzInfo')).headlogo||"http://p9wmpwieh.bkt.clouddn.com/yzedu/img/headlogo/robot.png",
             settingNav:[{
                 href:'./setting',
                 text:'个人信息'

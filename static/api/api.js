@@ -5,6 +5,7 @@ import { Notification} from 'element-ui'
 Vue.prototype.$notify = Notification;
 import Bus from '../../src/components/Bus'
 import { resolve } from 'url';
+axios.defaults.withCredentials = true
 /**
  * @fatdoge
  * 登录
@@ -82,10 +83,8 @@ let getNews = function () {
  */
 let getSingleLessonInfo = function(lessonId){
     return new Promise((resolve,reject)=>{
-        axios.get(config.singleLessonInfo,{
-            params:{
+        axios.post(config.singleLessonInfo,{
                 id: lessonId
-            }
         })
             .then((response) => {
                 resolve(response)
@@ -98,11 +97,13 @@ let getSingleLessonInfo = function(lessonId){
 }
 /**
  * @fatdoge
- * 获取课程列表
+ * 查找课程
  */
-let getLessonsList = function(){
+let searchLessons = function (keyword) {
     return new Promise((resolve, reject) => {
-        axios.get(config.lessonListUrl)
+        axios.post(config.lessonSearchUrl,{
+            className:keyword
+        })
             .then((response) => {
                 resolve(response)
             }
@@ -110,13 +111,52 @@ let getLessonsList = function(){
             .catch((error) => {
                 reject(error)
             })
-    })    
+    })
+}
+/**
+ * @fatdoge
+ * 校内课程列表
+ */
+let getLessonsList = function (keyword) {
+    return new Promise((resolve, reject) => {
+        axios.post(config.lessonSearchUrl,{
+            className:''
+        })
+            .then((response) => {
+                resolve(response)
+            }
+            )
+            .catch((error) => {
+                reject(error)
+            })
+    })
+}
+/**
+ * @fatdoge
+ * 更新历史记录
+ */
+let updateHistory = function (classId,rate) {
+    return new Promise((resolve, reject) => {
+        axios.post(config.updateHistoryUrl, {
+            classId: classId,
+            rate:rate
+        })
+            .then((response) => {
+                resolve(response)
+            }
+            )
+            .catch((error) => {
+                reject(error)
+            })
+    })
 }
 console.log('api.js loaded...')
 export default {
     login,//已连接
     register,//已连接
     getNews,//已连接
-    getSingleLessonInfo,
-    getLessonsList
+    getSingleLessonInfo,//已连接
+    getLessonsList,//已连接
+    searchLessons,//已连接 
+    updateHistory
 }

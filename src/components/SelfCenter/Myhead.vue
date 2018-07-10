@@ -45,9 +45,9 @@ export default {
     data(){
         return {
             nickname:'',
-            picUrl:"http://p9wmpwieh.bkt.clouddn.com/yzedu/img/headlogo/guest1.jpg",
+            picUrl:"http://p9wmpwieh.bkt.clouddn.com/yzedu/img/headlogo/robot.png",
             identity:'',
-            school:'',
+            school:'杭州电子科技大学',
             userid:'',
             ind:0,
             power:'',
@@ -91,10 +91,10 @@ export default {
         this.$nextTick(function () {
             if(sessionStorage.getItem('yzInfo')){
             let info1=JSON.parse(sessionStorage.getItem('yzInfo'));
-            this.picUrl=info1.headlogo||"http://p9wmpwieh.bkt.clouddn.com/yzedu/img/headlogo/guest1.jpg";
+            this.picUrl=info1.headlogo||"http://p9wmpwieh.bkt.clouddn.com/yzedu/img/headlogo/robot.png";
             this.nickname=info1.nickname;
             this.identity=info1.identity;
-            this.school=info1.school;
+            this.school=info1.school||'杭州电子科技大学';
             this.userid=info1.userid;
             this.power=info1.power;
             }else{

@@ -18,12 +18,11 @@
             </ul>
         </div>
         <center>
-            <h2>Office高级应用</h2>
+            <h2>{{classInfo.className}}</h2>
             <vue-star animate="animated rubberBand" color="rgb(152, 138, 222)">
                 <a slot="icon" class="fa fa-heart collect" @click="handleClick"></a>
             </vue-star>
             <div class="classVideo">
-                <h3>课程{{this.$route.params.lessonid}}渲染</h3>
                <div class="container">
                    <d-player :options="options"
                         @play="play"
@@ -36,8 +35,7 @@
         <hr>
         <div class="classInt mc">
             <h4>课程概述</h4>
-            <p>本课程以全国计算机等级考试“二级MS Office高级应用”考试大纲为基础，结合日常办公应用需求而有所扩展，讲解最常用的Word、Excel、PowerPoint三个应用组件，让学习者较系统地掌握Office的科学用法，在实际工作中能高质、高效使用Office解决问题，做到事半功倍，同时有助于顺利通过等级考试。
-                </p>
+            <p>{{classInfo.classDetail}}</p>
             <h4>课程大纲</h4>
             <p></p>
             <h4>预备知识</h4>
@@ -58,7 +56,7 @@ export default {
     return {
         options: {
           video: {
-            url: 'http://p9wmpwieh.bkt.clouddn.com/SAND%20IN%20THE%20SKY.mp4',
+            url: '',
             pic: 'http://p9wmpwieh.bkt.clouddn.com/cover.png'
           },
           autoplay: false,
@@ -70,7 +68,8 @@ export default {
           ],
           danmaku: {
             id: 'yzLesson1',
-            api: 'https://api.prprpr.me/dplayer/'
+            api: 'https://api.prprpr.me/dplayer/',
+            user:'fatdoge'
         },
         screenshot:true
         },
@@ -85,18 +84,70 @@ export default {
             placeholder: '来点评论呀~',
             path:this.$route.path, 
             avatar:'mm' 
+        },
+        //课程信息
+        classInfo:{
+            className:'',
+            classDetail:'',
+            rate:'',
+            classId:''
         }
     }
   },
-   mounted() {
-      this.player = this.$refs.player.dp;
+   mounted() {  
+    this.player = this.$refs.player.dp;      
       new Valine(this.valineop);
       console.log(this.valineop)
+        this.$api.getSingleLessonInfo(this.$route.params.lessonid)
+            .then(
+                (response)=>{
+                    if(response.data.status===200){
+                    console.log(response.data);
+                    this.classInfo.className=response.data.data.classname;
+                    this.classInfo.classDetail=response.data.data.classdetail;
+                    this.classInfo.rate=response.data.data.rate;
+                    this.classInfo.classId=response.data.data.id;
+                    this.options.video.url=response.data.data.classurl;
+                    this.options.danmaku.id=`yzLesson${response.data.data.id}`
+                    this.player.switchVideo({
+                            url: this.options.video.url
+                        },
+                        {
+                            id: this.options.danmaku.id,
+                            api: this.options.danmaku.api,
+                            user:'fatdoge'
+                        })
+                        console.log('上次保存的进度',this.classInfo.rate)
+                        if(this.classInfo.rate!==0){
+                            this.player.seek(rate);
+                        }
+                    }else{
+                        this.player.notice('找不到课程')
+                        console.log('未找到课程')
+                        this.player.switchVideo({
+                            url: ''
+                        },
+                        {
+                            id: '',
+                            api: '',
+                            user:'fatdoge'
+                        })
+                        this.classInfo.className='404 Not Found'
+                        this.classInfo.classDetail='404 Not Found'
+                    }
+                    
+                }
+                )
+                .catch(
+                    (reject)=>{
+                        console.log(reject)
+                    }
+                )      
     },
     methods: {
       play() {
         console.log('play callback')
-        console.log(this.player.danmaku.id)
+        console.log(this.options.danmaku.id)
       },
       pause(){
           console.log('pause callback')
@@ -104,6 +155,18 @@ export default {
       progress(){
           let currentTime=this.player.video.currentTime;
           console.log('当前进度:'+currentTime,"视频id:"+this.options.danmaku.id);
+          console.log(this.classInfo.classId,currentTime)
+          this.$api.updateHistory(this.classInfo.classId,currentTime)
+          .then(
+              (response)=>{
+                  console.log(response.data)
+              }
+          )
+          .catch(
+              (reject)=>{
+                  console.log(reject);
+              }
+          )
       },
       ended(){
           console.log('视频播放完毕')
@@ -123,6 +186,50 @@ export default {
           that.valineop.path=that.$route.path;
           Vue.nextTick(function(){
             new Valine(that.valineop);
+            that.$api.getSingleLessonInfo(that.$route.params.lessonid)
+            .then(
+                (response)=>{
+                    if(response.data.status===200){
+                    console.log(response.data);
+                    that.classInfo.className=response.data.data.classname;
+                    that.classInfo.classDetail=response.data.data.classdetail;
+                    that.classInfo.rate=response.data.data.rate;
+                    that.classInfo.classId=response.data.data.classId;
+                    that.options.video.url=response.data.data.classurl;
+                    that.options.danmaku.id=`yzLesson${response.data.data.id}`
+                    that.player.switchVideo({
+                            url: that.options.video.url
+                        },
+                        {
+                            id: that.options.danmaku.id,
+                            api: that.options.danmaku.api,
+                            user:'fatdoge'
+                        })
+                        if(that.classInfo.rate!==0){
+                            that.player.seek(rate);
+                        }
+                    }else{
+                        that.player.notice('找不到课程')
+                        console.log('未找到课程')
+                        that.player.switchVideo({
+                            url: ''
+                        },
+                        {
+                            id: '',
+                            api: '',
+                            user:'fatdoge'
+                        })
+                        that.classInfo.className='404 Not Found'
+                        that.classInfo.classDetail='404 Not Found'
+                    }
+                    
+                }
+                )
+                .catch(
+                    (reject)=>{
+                        console.log(reject)
+                    }
+                )      
         })
       }
   }

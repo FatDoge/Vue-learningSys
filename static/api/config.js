@@ -1,7 +1,7 @@
 /**
  * 接口地址
  */
-let url = 'http://hduzjh.cn/LearningSys'
+let url = 'http://192.168.2.136:8080'
 export default {
     // 登录接口
     loginUrl:`${url}/user/confirm`,
@@ -10,7 +10,11 @@ export default {
     // 新闻接口
     getNews:`${url}/news/query`,
     // 单节课程接口
-    singleLessonInfo:'',
+    singleLessonInfo:`${url}/class/get`,
     //课程列表接口
-    lessonListUrl:''
+    lessonListUrl: `${url}/class/query`,
+    //课程查询接口
+    lessonSearchUrl:`${url}/class/query`,
+    //历史记录
+    updateHistoryUrl: `${url}/history/update`
 }

@@ -95,67 +95,17 @@
                 </tr>
             </table>
         </div>
-        <div class="classitem">
-            <a href="#/lesson/1" target="_blank">
+        <div class="classitem" v-for="result in results" :key="result.id">
+            <a :href="'#/lesson/'+result.id" target="_blank">
                 <img v-lazy="src">
                 <span>
-                    <h4>office高级应用</h4>
-                    <p id="classSchool">成都信息工程大学</p>
-                    <p id="classTea"> 张伟利 、 何钰娟 、 朱烨 、 曾琼 、 赵吉武 、 谯雪梅 、 石远志 、 吴四九 、 羊裔高</p>
-                    <p id="classAbs">本课程以全国计算机等级考试“二级MS Office高级应用”考试大纲为基础，结合日常办公应用需求而有所扩展，讲解最常用的Word、Excel、PowerPoint三个应用组件，让学习者较系统地掌握Office的科学用法，在实际工作中能高质、高效使用Office解决问题，做到事半功倍，同时有助于顺利通过等级考试。
-                    </p>
+                    <h4>{{result.classname}}</h4>
+                    <p id="classSchool">{{result.school||'杭州电子科技大学'}}</p>
+                    <p id="classTea">{{result.classteacher}}</p>
+                    <p id="classAbs">{{result.classdetail}}</p>
                 </span>
             </a>
         </div>
-        <div class="classitem">
-            <a href="#" target="_blank">
-                <img v-lazy="src">
-                <span>
-                    <h4>office高级应用</h4>
-                    <p id="classSchool">成都信息工程大学</p>
-                    <p id="classTea"> 张伟利 、 何钰娟 、 朱烨 、 曾琼 、 赵吉武 、 谯雪梅 、 石远志 、 吴四九 、 羊裔高</p>
-                    <p id="classAbs">本课程以全国计算机等级考试“二级MS Office高级应用”考试大纲为基础，结合日常办公应用需求而有所扩展，讲解最常用的Word、Excel、PowerPoint三个应用组件，让学习者较系统地掌握Office的科学用法，在实际工作中能高质、高效使用Office解决问题，做到事半功倍，同时有助于顺利通过等级考试。
-                    </p>
-                </span>
-            </a>
-        </div>
-        <div class="classitem">
-            <a href="#" target="_blank">
-                <img v-lazy="src">
-                <span>
-                    <h4>office高级应用</h4>
-                    <p id="classSchool">成都信息工程大学</p>
-                    <p id="classTea"> 张伟利 、 何钰娟 、 朱烨 、 曾琼 、 赵吉武 、 谯雪梅 、 石远志 、 吴四九 、 羊裔高</p>
-                    <p id="classAbs">本课程以全国计算机等级考试“二级MS Office高级应用”考试大纲为基础，结合日常办公应用需求而有所扩展，讲解最常用的Word、Excel、PowerPoint三个应用组件，让学习者较系统地掌握Office的科学用法，在实际工作中能高质、高效使用Office解决问题，做到事半功倍，同时有助于顺利通过等级考试。
-                    </p>
-                </span>
-            </a>
-        </div>
-    </div>
-    <div class="pagi mc">
-        <ul class="pagination ">
-            <li class="disabled">
-                <a href="#">&laquo;</a>
-            </li>
-            <li class="active">
-                <a href="#">1</a>
-            </li>
-            <li>
-                <a href="#">2</a>
-            </li>
-            <li>
-                <a href="#">3</a>
-            </li>
-            <li>
-                <a href="#">4</a>
-            </li>
-            <li>
-                <a href="#">5</a>
-            </li>
-            <li>
-                <a href="#">&raquo;</a>
-            </li>
-        </ul>
     </div>
   </div>
 </template>
@@ -182,8 +132,18 @@
     export default {
         data(){
             return {
-                src:'static/img/office.png'
+                src:'static/img/cover.jpg',
+                results:[]
             }
-        }
+        },
+        mounted() {
+            this.$api.getLessonsList()
+            .then(
+                (response)=>{
+                    console.log(response.data)
+                    this.results=response.data.data
+                }
+            )
+        },
     }
 </script>

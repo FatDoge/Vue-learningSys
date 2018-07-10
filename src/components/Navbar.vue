@@ -1,5 +1,12 @@
 <template>
  <div id="navBar">  
+     <el-dialog
+  title="搜索结果"
+  :visible.sync="dialogVisible"
+  width="50%"
+  >
+  <el-button v-for="result in results"  @click="openLesson(result.id)" :key="result.id">{{result.classname}}</el-button>
+</el-dialog>
    <!-- 模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -40,13 +47,12 @@
         <form action="" method="get" class="input-group">
             <div class="serch">
                 <form>
-                    <input type="text" class="form-control" value="数据结构">
+                    <input type="text" class="form-control" v-model="queryLesson" placeholder="输入课程关键字">
                 </form>
-
             </div>
             <div class="serchBu">
                 <form>
-                    <input type="button" class="input-group-addon">
+                    <input type="button" class="input-group-addon" @click="search">
                 </form>
             </div>
         </form>
@@ -100,9 +106,62 @@ export default {
       picUrl:'',
       nickname:'',
       isLogin:false,
-      userid:''
+      userid:'',
+      queryLesson:'',
+      dialogVisible: false,
+      results:[]
     }
   },methods:{
+      search(){
+          if(this.queryLesson.trim()!==''){
+            this.$api.searchLessons(this.queryLesson)
+          .then(
+              (response)=>{
+                  if(response.data.status===200){
+                      console.log(response.data)
+                    console.log(this.queryLesson)
+                    console.log(response.data)
+                    this.results=response.data.data;
+                    this.dialogVisible = true;
+                  }else{
+                      console.log(response.data)
+                    Vue.prototype.$notify({
+                    title: '查询成功',
+                    message: '未找到相应课程',
+                    type: 'info',
+                    offset:50,
+                    duration: 1000
+                })
+                  }                  
+                  this.queryLesson='';
+              }
+          )
+          .catch(
+              (reject)=>{
+                  Vue.prototype.$notify({
+                    title: '查询失败',
+                    message: '服务端错误',
+                    type: 'error',
+                    offset:50,
+                    duration: 1000
+                })
+              }
+          )
+          }else{
+              this.queryLesson='';
+              Vue.prototype.$notify({
+                    title: '查询失败',
+                    message: '请输入关键字',
+                    type: 'error',
+                    offset:50,
+                    duration: 1000
+                })
+          }
+          
+      },
+      openLesson(id){
+          window.open(`#/lesson/${id}`);
+      },
         userLogin(username,password){
             //本地api
             if(this.username&&this.password){
@@ -144,7 +203,7 @@ export default {
         this.$nextTick(function () {
             if(sessionStorage.getItem('yzInfo')){
             let info1=JSON.parse(sessionStorage.getItem('yzInfo'));
-            this.picUrl=info1.headlogo||"http://p9wmpwieh.bkt.clouddn.com/yzedu/img/headlogo/guest1.jpg";
+            this.picUrl=info1.headlogo||"http://p9wmpwieh.bkt.clouddn.com/yzedu/img/headlogo/robot.png";
             this.nickname=info1.nickname;
             this.isLogin=true;
             this.userid=info1.userid;
@@ -155,7 +214,7 @@ export default {
             self.$nextTick(function () {
             if(sessionStorage.getItem('yzInfo')){
             let info1=JSON.parse(sessionStorage.getItem('yzInfo'));
-            self.picUrl=info1.headlogo||"http://p9wmpwieh.bkt.clouddn.com/yzedu/img/headlogo/guest1.jpg";
+            self.picUrl=info1.headlogo||"http://p9wmpwieh.bkt.clouddn.com/yzedu/img/headlogo/robot.png";
             self.nickname=info1.nickname;
             self.isLogin=true;
             self.userid=info1.userid;
