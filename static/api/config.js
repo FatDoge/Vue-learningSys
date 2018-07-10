@@ -1,7 +1,7 @@
 /**
  * 接口地址
  */
-let url = 'http://192.168.2.136:8080'
+let url = 'http://hduzjh.cn/LearningSys'
 export default {
     // 登录接口
     loginUrl:`${url}/user/confirm`,

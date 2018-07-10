@@ -90,7 +90,8 @@ export default {
             className:'',
             classDetail:'',
             rate:'',
-            classId:''
+            classId:'',
+            oldRate:''
         }
     }
   },
@@ -102,6 +103,7 @@ export default {
             .then(
                 (response)=>{
                     if(response.data.status===200){
+                        this.classInfo.oldRate=response.data.data.rate;
                     console.log(response.data);
                     this.classInfo.className=response.data.data.classname;
                     this.classInfo.classDetail=response.data.data.classdetail;
@@ -118,8 +120,8 @@ export default {
                             user:'fatdoge'
                         })
                         console.log('上次保存的进度',this.classInfo.rate)
-                        if(this.classInfo.rate!==0){
-                            this.player.seek(rate);
+                        if(this.classInfo.oldRate){
+                            this.player.seek(this.classInfo.oldRate);
                         }
                     }else{
                         this.player.notice('找不到课程')
@@ -190,11 +192,12 @@ export default {
             .then(
                 (response)=>{
                     if(response.data.status===200){
+                        that.classInfo.oldRate=response.data.data.rate;
                     console.log(response.data);
                     that.classInfo.className=response.data.data.classname;
                     that.classInfo.classDetail=response.data.data.classdetail;
                     that.classInfo.rate=response.data.data.rate;
-                    that.classInfo.classId=response.data.data.classId;
+                    that.classInfo.classId=response.data.data.id;
                     that.options.video.url=response.data.data.classurl;
                     that.options.danmaku.id=`yzLesson${response.data.data.id}`
                     that.player.switchVideo({
@@ -205,8 +208,8 @@ export default {
                             api: that.options.danmaku.api,
                             user:'fatdoge'
                         })
-                        if(that.classInfo.rate!==0){
-                            that.player.seek(rate);
+                        if(that.classInfo.oldRate!==0){
+                            that.player.seek(that.classInfo.oldRate);
                         }
                     }else{
                         that.player.notice('找不到课程')
