@@ -22,8 +22,8 @@
             <!-- <vue-star animate="animated rubberBand" color="rgb(152, 138, 222)" :active='true'>
                 <a slot="icon" class="fa fa-heart collect" @click="handleClick"></a>
             </vue-star> -->
-              <vue-star-plus v-model="classInfo.favourite" color="#ff0000" class="i-star__component">
-            <span slot="icon" class="i-star__text" style="color:#444">❤</span>
+              <vue-star-plus v-model="classInfo.favourite" color="#ff0000" class="i-star__component" animate="animated rubberBand">
+            <span slot="icon" class="i-star__text" :style="{color:(classInfo.favourite?'rgb(240,86,84)':'#444'),'font-size':'20px'}" @click="handleClick"><i class="fa fa-heart"></i></span>
             </vue-star-plus>
             <div class="classVideo">
                <div class="container">
@@ -180,16 +180,17 @@ export default {
       },
       handleClick () {
       //do something
-      console.log('点击')
       this.$api.toggleCollection(this.classInfo.classId)
       .then(
           (response)=>{
               console.log(response.data);
+              this.$message(response.data.msg)
           }
       )
       .catch(
           (reject)=>{
               console.log(reject)
+              this.$message(reject)
           }
       )
     }

@@ -54,7 +54,7 @@ export default {
             stuBar:[{
                 href:'./',
                 class:"fa fa-user",
-                text:"我的课程"
+                text:"我的收藏"
             },{
                 href:'./history',
                 class:"fa fa-history",
@@ -71,7 +71,7 @@ export default {
             teaBar:[{
                 href:'./',
                 class:"fa fa-user",
-                text:"课程管理"
+                text:"我的收藏"
             },
             {
                 href:'./history',

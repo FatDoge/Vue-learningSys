@@ -101,6 +101,18 @@
                             type: 'success',
                             message: '删除成功!'
                         });
+                        this.$api.getHistory()
+                            .then(
+                                (response)=>{
+                                    console.log(response.data.data)
+                                    this.historyList=response.data.data;
+                                }
+                            )
+                            .catch(
+                                (reject)=>{
+                                    console.log(reject)
+                                }
+                            )
                         }
                     )
                     .catch(

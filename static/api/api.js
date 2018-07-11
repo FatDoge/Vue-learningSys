@@ -227,6 +227,6 @@ export default {
     updateHistory,//已连接
     getHistory,//已连接
     deleteHistory,//已连接
-    getCollection,
-    toggleCollection
+    getCollection,//已连接
+    toggleCollection,//已连接
 }
