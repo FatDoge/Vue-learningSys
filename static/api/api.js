@@ -38,6 +38,7 @@ let login= function (username, password) {
                 console.log('登陆成功')
                 sessionStorage.setItem('yzInfo', JSON.stringify(res.data.data));
                 Bus.$emit('yzInfo',JSON.stringify(res.data.data))
+                Bus.$emit('userId', res.data.data.userid)
                 return true;
             }
         })
@@ -54,6 +55,23 @@ let register= function (registerParams) {
         axios.post(config.registerUrl,registerParams)
             .then((response) => {
                 resolve(response)
+            }
+            )
+            .catch((error) => {
+                reject(error)
+            })
+    })
+}
+/**
+ * @fatdoge
+ * 退出
+ */
+let exit = function () {
+    return new Promise((resolve, reject) => {
+        axios.post(config.exitUrl)
+            .then((response) => {
+                resolve(response)
+                Bus.$emit('isLogin', false)
             }
             )
             .catch((error) => {
@@ -220,6 +238,7 @@ console.log('api.js loaded...')
 export default {
     login,//已连接
     register,//已连接
+    exit,//
     getNews,//已连接
     getSingleLessonInfo,//已连接
     getLessonsList,//已连接

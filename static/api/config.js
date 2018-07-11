@@ -5,6 +5,8 @@ let url = 'http://hduzjh.cn/LearningSys'
 export default {
     // 登录接口
     loginUrl:`${url}/user/confirm`,
+    //退出接口
+    exitUrl: `${url}/user/exit`,
     // 注册接口
     registerUrl: `${url}/user/register`,
     // 新闻接口

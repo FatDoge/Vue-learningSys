@@ -77,7 +77,7 @@
             
                 </a>
                  <a>/</a>
-                <a href="#" @click="userExit()">退出</a>
+                <a @click="userExit()">退出</a>
                 </div>
         </div>
     </div>
@@ -179,11 +179,23 @@ export default {
             console.log(username,password);       
         },
         userExit(){
-            this.$options.methods.Notice.bind(this)({
+            this.$api.exit()
+            .then(
+                (response)=>{
+                    console.log(response.data)
+                    this.$options.methods.Notice.bind(this)({
                 title:'已登出',
                 message:"部分功能将失效",
                 type:'success',
             });
+                }
+            )
+            .catch(
+                (reject)=>{
+                    console.log(reject)
+                }
+            )
+            
             this.isLogin=false;
             sessionStorage.removeItem('yzInfo');
             console.log(this.$route.path.indexOf('user')>-1);
@@ -281,5 +293,8 @@ export default {
 }
 li .router-link-exact-active{
    color:#48cfad;
+}
+a:hover{
+    cursor:pointer
 }
 </style>

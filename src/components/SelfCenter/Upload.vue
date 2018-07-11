@@ -12,7 +12,8 @@
         :on-preview="handlePreview"
         :on-remove="handleRemove"
         :file-list="fileList"
-        :auto-upload="false">
+        :auto-upload="false"
+        :before-upload="listFileInfo">
         <el-button slot="trigger" size="huge" type="primary">选取视频<i class="el-icon-upload el-icon--right"></i></el-button>
         </el-upload>
     </el-form-item>
@@ -86,14 +87,17 @@
       onSubmit(formName) {
           this.$refs[formName].validate((valid) => {
           if (valid) {
-            console.log(this.fileList);
+            console.log("文件列表",this.fileList);
         this.$refs.upload.submit();
-        console.log(this.form);
+        console.log('表单信息',this.form);
           } else {
             console.log('error submit!!');
             return false;
           }
         });
+      },
+      listFileInfo(file){
+console.log('文件',file)
       },
       submitUpload() {
         this.$refs.upload.submit();

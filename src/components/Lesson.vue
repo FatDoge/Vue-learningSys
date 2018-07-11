@@ -52,6 +52,7 @@
 </template>
 <script>
 import Vue from 'vue'
+import Bus from './Bus'
 import VueDPlayer from 'vue-dplayer'
 export default {
   name: 'Lesson',
@@ -100,6 +101,59 @@ export default {
     }
   },
    mounted() {  
+       Bus.$on('isLogin',(e)=>{
+           console.log('总线值',e)
+           this.classInfo.favourite=e;
+       })
+       Bus.$on('userId',(e)=>{
+           this.$api.getSingleLessonInfo(this.$route.params.lessonid)
+           .then(
+                (response)=>{
+                    if(response.data.status===200){
+                        this.classInfo.oldRate=response.data.data.rate;
+                    console.log(response.data);
+                    this.classInfo.className=response.data.data.classname;
+                    this.classInfo.classDetail=response.data.data.classdetail;
+                    this.classInfo.favourite=response.data.data.favourite;
+                    this.classInfo.rate=response.data.data.rate;
+                    this.classInfo.classId=response.data.data.id;
+                    this.options.video.url=response.data.data.classurl;
+                    this.options.danmaku.id=`yzLesson${response.data.data.id}`
+                    this.player.switchVideo({
+                            url: this.options.video.url
+                        },
+                        {
+                            id: this.options.danmaku.id,
+                            api: this.options.danmaku.api,
+                            user:'fatdoge'
+                        })
+                        console.log('上次保存的进度',this.classInfo.rate)
+                        if(this.classInfo.oldRate){
+                            this.player.seek(this.classInfo.oldRate);
+                        }
+                    }else{
+                        this.player.notice('找不到课程')
+                        console.log('未找到课程')
+                        this.player.switchVideo({
+                            url: ''
+                        },
+                        {
+                            id: '',
+                            api: '',
+                            user:'fatdoge'
+                        })
+                        this.classInfo.className='404 Not Found'
+                        this.classInfo.classDetail='404 Not Found'
+                    }
+                    
+                }
+                )
+                .catch(
+                    (reject)=>{
+                        console.log(reject)
+                    }
+                )      
+       })
     this.player = this.$refs.player.dp;      
       new Valine(this.valineop);
       console.log(this.valineop)
@@ -184,6 +238,12 @@ export default {
       .then(
           (response)=>{
               console.log(response.data);
+              if(response.data.status===202){
+                  setTimeout(() => {
+                      this.classInfo.favourite=false;
+                  }, 500);
+                  
+              }
               this.$message(response.data.msg)
           }
       )
@@ -199,6 +259,36 @@ export default {
     'd-player': VueDPlayer,
   },
   watch:{
+      classInfo:function(){
+this.$api.getSingleLessonInfo(this.$route.params.lessonid)
+            .then(
+                (response)=>{
+                    if(response.data.status===200){
+                    this.classInfo.favourite=response.data.data.favourite;
+                    }else{
+                        this.player.notice('找不到课程')
+                        console.log('未找到课程')
+                        this.player.switchVideo({
+                            url: ''
+                        },
+                        {
+                            id: '',
+                            api: '',
+                            user:'fatdoge'
+                        })
+                        this.classInfo.className='404 Not Found'
+                        this.classInfo.classDetail='404 Not Found'
+                    }
+                    
+                }
+                )
+                .catch(
+                    (reject)=>{
+                        console.log(reject)
+                    }
+                )                        
+          
+      },
       //检测url变动重新渲染comment
       $route(to){
           let that=this;
