@@ -8,12 +8,15 @@
         <el-upload
         class="upload-demo"
         ref="upload"
-        action="https://jsonplaceholder.typicode.com/posts/"
+        action="http://hduzjh.cn/LearningSys/class/upload"
         :on-preview="handlePreview"
         :on-remove="handleRemove"
         :file-list="fileList"
         :auto-upload="false"
-        :before-upload="listFileInfo">
+        :before-upload="listFileInfo"
+        :on-error="onError"
+        :on-success="onSuccess"
+        :data="form">
         <el-button slot="trigger" size="huge" type="primary">选取视频<i class="el-icon-upload el-icon--right"></i></el-button>
         </el-upload>
     </el-form-item>
@@ -60,7 +63,8 @@
           delivery: false,
           type: [],
           resource: '',
-          desc: ''
+          desc: '',
+          userId:JSON.parse(sessionStorage.getItem('yzInfo')).userid
         },
         rules: {
           name: [
@@ -84,6 +88,12 @@
       }
     },
     methods: {
+      onSuccess:function(response,file,fileList){
+        console.log('成功'.response);
+      },
+      onError:function(response,file,fileList){
+        console.log('失败'.response);
+      },
       onSubmit(formName) {
           this.$refs[formName].validate((valid) => {
           if (valid) {

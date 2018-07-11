@@ -238,7 +238,7 @@ console.log('api.js loaded...')
 export default {
     login,//已连接
     register,//已连接
-    exit,//
+    exit,//已连接
     getNews,//已连接
     getSingleLessonInfo,//已连接
     getLessonsList,//已连接
