@@ -72,6 +72,11 @@ export default {
                 href:'./',
                 class:"fa fa-user",
                 text:"课程管理"
+            },
+            {
+                href:'./history',
+                class:"fa fa-history",
+                text:"浏览记录"
             },{
                 href:'./grade',
                 class:"fa fa-search",

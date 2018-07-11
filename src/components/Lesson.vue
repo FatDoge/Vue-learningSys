@@ -19,9 +19,12 @@
         </div>
         <center>
             <h2>{{classInfo.className}}</h2>
-            <vue-star animate="animated rubberBand" color="rgb(152, 138, 222)">
+            <!-- <vue-star animate="animated rubberBand" color="rgb(152, 138, 222)" :active='true'>
                 <a slot="icon" class="fa fa-heart collect" @click="handleClick"></a>
-            </vue-star>
+            </vue-star> -->
+              <vue-star-plus v-model="classInfo.favourite" color="#ff0000" class="i-star__component">
+            <span slot="icon" class="i-star__text" style="color:#444">❤</span>
+            </vue-star-plus>
             <div class="classVideo">
                <div class="container">
                    <d-player :options="options"
@@ -91,7 +94,8 @@ export default {
             classDetail:'',
             rate:'',
             classId:'',
-            oldRate:''
+            oldRate:'',
+            favourite:false
         }
     }
   },
@@ -107,6 +111,7 @@ export default {
                     console.log(response.data);
                     this.classInfo.className=response.data.data.classname;
                     this.classInfo.classDetail=response.data.data.classdetail;
+                    this.classInfo.favourite=response.data.data.favourite;
                     this.classInfo.rate=response.data.data.rate;
                     this.classInfo.classId=response.data.data.id;
                     this.options.video.url=response.data.data.classurl;
@@ -176,6 +181,17 @@ export default {
       handleClick () {
       //do something
       console.log('点击')
+      this.$api.toggleCollection(this.classInfo.classId)
+      .then(
+          (response)=>{
+              console.log(response.data);
+          }
+      )
+      .catch(
+          (reject)=>{
+              console.log(reject)
+          }
+      )
     }
     },
   components: {
@@ -198,6 +214,7 @@ export default {
                     that.classInfo.classDetail=response.data.data.classdetail;
                     that.classInfo.rate=response.data.data.rate;
                     that.classInfo.classId=response.data.data.id;
+                    that.classInfo.favourite=response.data.data.favourite;
                     that.options.video.url=response.data.data.classurl;
                     that.options.danmaku.id=`yzLesson${response.data.data.id}`
                     that.player.switchVideo({

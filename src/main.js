@@ -7,13 +7,17 @@ import router from './router'
 import RightNavbar from '@/components/CircleNavbar/RightNavbar'
 import VueResource from 'vue-resource';
 import VueLazyload from 'vue-lazyload';
-import { Notification, Pagination,Upload,Form,FormItem,Input,Radio,RadioGroup,Button,Checkbox,CheckboxGroup,DatePicker,TimePicker,Select,Option,Col,Row,Dialog } from 'element-ui';
+import { Notification,Message,Pagination,Upload,Form,FormItem,Input,Radio,RadioGroup,Button,Checkbox,CheckboxGroup,DatePicker,TimePicker,Select,Option,Col,Row,Dialog,Card,MessageBox } from 'element-ui';
 import api from '../static/api/api'
+import 'element-ui/lib/theme-chalk/index.css';
 Vue.prototype.$api = api
 Vue.prototype.$notify = Notification;
+Vue.prototype.$confirm=MessageBox.confirm;
+Vue.prototype.$message=Message;
 import CommentGrid from 'vue-comment-grid'
-import VueStar from 'vue-star'
-Vue.component('VueStar', VueStar)
+import VueStarPlus from 'vue-star-plus'
+import '../node_modules/vue-star-plus/lib/vue-star-plus.css'
+Vue.component('vue-star-plus', VueStarPlus)
 Vue.use(CommentGrid)
 Vue.use(VueLazyload);
 Vue.use(VueResource);
@@ -34,6 +38,7 @@ Vue.use(Option)
 Vue.use(Col)
 Vue.use(Row)
 Vue.use(Dialog)
+Vue.use(Card)
 Vue.use(VCharts)
 // collapse 展开折叠
 import CollapseTransition from 'element-ui/lib/transitions/collapse-transition';

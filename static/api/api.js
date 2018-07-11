@@ -67,7 +67,7 @@ let register= function (registerParams) {
  */
 let getNews = function () {
     return new Promise((resolve,reject)=>{
-        axios.get(config.getNews)
+        axios.post(config.getNews)
             .then((response) => {
                 resolve(response)
             }
@@ -150,6 +150,72 @@ let updateHistory = function (classId,rate) {
             })
     })
 }
+/**
+ * @fatdoge
+ * 获取历史记录
+ */
+let getHistory = function () {
+    return new Promise((resolve, reject) => {
+        axios.post(config.getHistoryUrl)
+            .then((response) => {
+                resolve(response)
+            }
+            )
+            .catch((error) => {
+                reject(error)
+            })
+    })
+}
+/**
+ * @fatdoge
+ * 删除历史记录
+ */
+let deleteHistory = function () {
+    return new Promise((resolve, reject) => {
+        axios.post(config.deleteHistoryUrl)
+            .then((response) => {
+                resolve(response)
+            }
+            )
+            .catch((error) => {
+                reject(error)
+            })
+    })
+}
+/**
+ * @fatdoge
+ * 获取收藏夹
+ */
+let getCollection = function () {
+    return new Promise((resolve, reject) => {
+        axios.post(config.getCollectionUrl)
+            .then((response) => {
+                resolve(response)
+            }
+            )
+            .catch((error) => {
+                reject(error)
+            })
+    })
+}
+/**
+ * @fatdoge
+ * toggle收藏项目
+ */
+let toggleCollection = function (classId) {
+    return new Promise((resolve, reject) => {
+        axios.post(config.toggleCollectionUrl,{
+            id:classId
+        })
+            .then((response) => {
+                resolve(response)
+            }
+            )
+            .catch((error) => {
+                reject(error)
+            })
+    })
+}
 console.log('api.js loaded...')
 export default {
     login,//已连接
@@ -158,5 +224,9 @@ export default {
     getSingleLessonInfo,//已连接
     getLessonsList,//已连接
     searchLessons,//已连接 
-    updateHistory
+    updateHistory,//已连接
+    getHistory,//已连接
+    deleteHistory,//已连接
+    getCollection,
+    toggleCollection
 }

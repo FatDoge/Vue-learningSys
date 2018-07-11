@@ -34,6 +34,11 @@ export default {
                 this.newsList=response.data.data;
             }
         )
+        .catch(
+            (reject)=>{
+                console.log(reject)
+            }
+        )
     },
 }
 </script>

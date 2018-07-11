@@ -15,6 +15,14 @@ export default {
     lessonListUrl: `${url}/class/query`,
     //课程查询接口
     lessonSearchUrl:`${url}/class/query`,
-    //历史记录
-    updateHistoryUrl: `${url}/history/update`
+    //更新历史记录
+    updateHistoryUrl: `${url}/history/update`,
+    //获取历史记录
+    getHistoryUrl: `${url}/history/query`,
+    //清空历史记录
+    deleteHistoryUrl: `${url}/history/delete`,
+    //收藏项目toggle
+    toggleCollectionUrl: `${url}/favourite/addanddelete`,
+    //查看收藏夹
+    getCollectionUrl: `${url}/favourite/query`,
 }
