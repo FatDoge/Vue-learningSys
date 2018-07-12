@@ -234,6 +234,72 @@ let toggleCollection = function (classId) {
             })
     })
 }
+/**
+ * @fatdoge
+ * 获取token
+ */
+let getQiniuToken = function (classId) {
+    return new Promise((resolve, reject) => {
+        axios.post(config.getQiniuTokenUrl)
+            .then((response) => {
+                resolve(response)
+            }
+            )
+            .catch((error) => {
+                reject(error)
+            })
+    })
+}
+/**
+ * @fatdoge
+ * 上传七牛云后，发送视频信息
+ */
+let sendNewLessonInfo = function (form) {
+    return new Promise((resolve, reject) => {
+        axios.post(config.sendNewLessonInfoUrl,form)
+            .then((response) => {
+                resolve(response)
+            }
+            )
+            .catch((error) => {
+                reject(error)
+            })
+    })
+}
+/**
+ * @fatdoge
+ * 获取高权限用户个人上传视频列表
+ */
+let getPersonalVideosList = function () {
+    return new Promise((resolve, reject) => {
+        axios.post(config.getPersonalVideosListUrl)
+            .then((response) => {
+                resolve(response)
+            }
+            )
+            .catch((error) => {
+                reject(error)
+            })
+    })
+}
+/**
+ * @fatdoge
+ * 高权限用户删除个人上传视频
+ */
+let deletePersonalVideo = function (id) {
+    return new Promise((resolve, reject) => {
+        axios.post(config.deletePersonalVideoUrl,{
+            id:id
+        })
+            .then((response) => {
+                resolve(response)
+            }
+            )
+            .catch((error) => {
+                reject(error)
+            })
+    })
+}
 console.log('api.js loaded...')
 export default {
     login,//已连接
@@ -248,4 +314,8 @@ export default {
     deleteHistory,//已连接
     getCollection,//已连接
     toggleCollection,//已连接
+    getQiniuToken,//已连接
+    sendNewLessonInfo,//已连接
+    getPersonalVideosList,//已连接
+    deletePersonalVideo,//已连接
 }

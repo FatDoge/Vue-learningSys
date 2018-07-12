@@ -82,13 +82,13 @@ export default {
                 class:"fa fa-search",
                 text:"数据分析"
             },{
-                href:'./skill',
-                class:"fa fa-thumbs-up",
-                text:"能力档案"
-            },{
                 href:'./upload',
                 class:"fa fa-upload",
                 text:"上传视频"
+            },{
+                href:'./manage',
+                class:"fa fa-cog",
+                text:"视频管理"
             }]
         }
     },

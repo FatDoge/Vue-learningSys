@@ -29,6 +29,7 @@ import News from '@/components/SelfCenter/News'
 import History from '@/components/SelfCenter/History'
 //教师管理课程
 import Upload from '@/components/SelfCenter/Upload'
+import Manage from '@/components/SelfCenter/Manage'
 //个人设置
 import SettingNavbar from '@/components/SelfCenter/Setting/SettingNavbar'
 import SetUp from '@/components/SelfCenter/Setting/SetUp'
@@ -144,6 +145,10 @@ export default new Router({
         {
           path: 'upload',
           component: Upload
+        },
+        {
+          path: 'manage',
+          component: Manage
         },
         {
           path: 'history',

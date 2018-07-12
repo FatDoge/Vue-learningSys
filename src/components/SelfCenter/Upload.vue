@@ -8,15 +8,12 @@
         <el-upload
         class="upload-demo"
         ref="upload"
-        action="http://hduzjh.cn/LearningSys/class/upload"
-        :on-preview="handlePreview"
-        :on-remove="handleRemove"
+        action="http://up.qiniu.com"
         :file-list="fileList"
         :auto-upload="false"
-        :before-upload="listFileInfo"
         :on-error="onError"
         :on-success="onSuccess"
-        :data="form">
+        :data="qiniuInfo">
         <el-button slot="trigger" size="huge" type="primary">选取视频<i class="el-icon-upload el-icon--right"></i></el-button>
         </el-upload>
     </el-form-item>
@@ -64,7 +61,11 @@
           type: [],
           resource: '',
           desc: '',
-          userId:JSON.parse(sessionStorage.getItem('yzInfo')).userid
+          userId:JSON.parse(sessionStorage.getItem('yzInfo')).userid,
+          lessonUrl:'http://owmhe4011.bkt.clouddn.com/'
+        },
+        qiniuInfo:{
+          token:"",
         },
         rules: {
           name: [
@@ -84,21 +85,46 @@
             { required: true, message: '请填写课程简介', trigger: 'blur' }
           ]
         },
-        fileList: []
+        fileList: [],
+        file:'',
+        bucketHost: '',   // 上传视频的外链域名
+        lessonUrl:''
       }
     },
     methods: {
       onSuccess:function(response,file,fileList){
-        console.log('成功'.response);
+      console.log(response);
+      this.form.lessonUrl='http://owmhe4011.bkt.clouddn.com/'+response.hash;
+      this.$api.sendNewLessonInfo(this.form)
+      .then(
+        (response)=>{
+          console.log(response);
+          this.$message(response.data.msg)
+        }
+      )
+      .catch(
+        (reject)=>{
+          console.log(reject);
+        }
+      )
       },
-      onError:function(response,file,fileList){
-        console.log('失败'.response);
+      onError:function(err,file,fileList){
+        console.log('失败',err);
       },
       onSubmit(formName) {
           this.$refs[formName].validate((valid) => {
-          if (valid) {
-            console.log("文件列表",this.fileList);
-        this.$refs.upload.submit();
+          if (valid) {  
+            this.$api.getQiniuToken()
+      .then(response => {
+        this.qiniuInfo.token= response.data.token
+        this.$message('授权成功,开始上传...')
+           this.$refs.upload.submit();
+      })
+      .catch(reject=>{
+        console.log(reject)
+      })
+
+         
         console.log('表单信息',this.form);
           } else {
             console.log('error submit!!');
@@ -106,18 +132,9 @@
           }
         });
       },
-      listFileInfo(file){
-console.log('文件',file)
-      },
       submitUpload() {
         this.$refs.upload.submit();
       },
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      handlePreview(file) {
-        console.log(file);
-      }
     }
   }
 </script>
