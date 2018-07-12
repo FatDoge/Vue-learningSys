@@ -13,8 +13,12 @@
         :auto-upload="false"
         :on-error="onError"
         :on-success="onSuccess"
-        :data="qiniuInfo">
+        :before-upload="judgeType"
+        :data="qiniuInfo"
+        :limit="1"
+        :on-exceed="overSize">
         <el-button slot="trigger" size="huge" type="primary">选取视频<i class="el-icon-upload el-icon--right"></i></el-button>
+        <div slot="tip" class="el-upload__tip">只能上传mp4文件，且不超过500mb</div>
         </el-upload>
     </el-form-item>
   <el-form-item label="课程名称" prop="name">
@@ -70,7 +74,7 @@
         rules: {
           name: [
             { required: true, message: '请输入课程名称', trigger: 'blur' },
-            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+            { min: 1, max: 10, message: '长度在 1 到 10 个字符', trigger: 'blur' }
           ],
           region: [
             { required: true, message: '请选择课程类别', trigger: 'change' }
@@ -127,14 +131,22 @@
          
         console.log('表单信息',this.form);
           } else {
-            console.log('error submit!!');
+            this.$message.error('未选择视频!');
             return false;
           }
         });
       },
-      submitUpload() {
-        this.$refs.upload.submit();
+      judgeType(file) {
+        const isVideo = file.type === 'video/mp4';
+        if (!isVideo) {
+          this.$message.error('只支持上传mp4格式视频');
+        }
+        return isVideo;
       },
+      overSize(file){
+        this.$message.error('超出个数')
+        return false;
+      }
     }
   }
 </script>
