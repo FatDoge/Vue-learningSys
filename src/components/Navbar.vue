@@ -47,7 +47,7 @@
         <form action="" method="get" class="input-group">
             <div class="serch">
                 <form>
-                    <input type="text" class="form-control" v-model="queryLesson" placeholder="输入课程关键字">
+                    <input type="text" class="form-control" v-model="queryLesson" placeholder="输入课程关键字" onkeydown="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}">
                 </form>
             </div>
             <div class="serchBu">
