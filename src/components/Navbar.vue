@@ -126,7 +126,7 @@ export default {
                   }else{
                       console.log(response.data)
                     Vue.prototype.$notify({
-                    title: '查询成功',
+                    title: '查询结果',
                     message: '未找到相应课程',
                     type: 'info',
                     offset:50,
