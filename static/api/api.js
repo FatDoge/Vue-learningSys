@@ -4,7 +4,6 @@ import Vue from 'Vue'
 import { Notification} from 'element-ui'
 Vue.prototype.$notify = Notification;
 import Bus from '../../src/components/Bus'
-import { resolve } from 'url';
 axios.defaults.withCredentials = true
 /**
  * @fatdoge

@@ -22,7 +22,7 @@
             <!-- <vue-star animate="animated rubberBand" color="rgb(152, 138, 222)" :active='true'>
                 <a slot="icon" class="fa fa-heart collect" @click="handleClick"></a>
             </vue-star> -->
-              <vue-star-plus v-model="classInfo.favourite" color="#ff0000" class="i-star__component" animate="animated rubberBand">
+              <vue-star-plus v-model="classInfo.favourite" color="#ff0000" class="i-star__component" :class="{'animated rubberBand':classInfo.favourite}">
             <span slot="icon" class="i-star__text" :style="{color:(classInfo.favourite?'rgb(240,86,84)':'#444'),'font-size':'20px'}" @click="handleClick"><i class="fa fa-heart"></i></span>
             </vue-star-plus>
             <div class="classVideo">
@@ -420,7 +420,7 @@ this.$api.getSingleLessonInfo(this.$route.params.lessonid)
     color: rgb(240, 86, 84);
 }
 .VueStar{
-    position: fixed;
+    position: fixed!important;
     right: -13px;
     bottom: 40px;
     z-index: 999;
